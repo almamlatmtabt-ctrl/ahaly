@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم إرسال طلبك بنجاح</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .success-container {
+            padding: 20px;
+        }
+        .check-icon {
+            font-size: 60px;
+            color: #006b4f;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="check-icon">✓</div>
+        <h1>تم إرسال طلبك بنجاح</h1>
+        <p>سيتواصل معك أحد ممثلي خدمة العملاء في أقرب وقت ممكن</p>
+    </div>
+
+    <script>
+        // تتبع الزيارة
+        fetch('/track_visit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'track_visit', page: 'success' })
+        }).catch(e => console.error(e));
+    </script>
+</body>
+</html>

